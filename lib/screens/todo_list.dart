@@ -105,6 +105,12 @@ class _TodoListPageState extends State<TodoListPage> {
       setState(() {
         items = items.where((element) => element['_id'] != id).toList();
       });
+      showDeleteMessage('Todo deleted');
     }
+  }
+
+  void showDeleteMessage(String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

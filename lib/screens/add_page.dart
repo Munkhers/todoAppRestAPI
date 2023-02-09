@@ -58,7 +58,23 @@ class _AddTodoPageState extends State<AddTodoPage> {
   }
 
   Future<void> updateData() async {
-    // Update tooooooo dooooooooo
+    final title = titleController.text;
+    final description = descriptionController.text;
+    final body = {
+      "title": title,
+      "description": description,
+      "is_completed": false,
+    };
+    final response = await Dio().post(
+        'https://api.nstack.in/v1/todos/63e42831247493dcaf9837ab',
+        data: body);
+    if (response.statusCode == 201) {
+      titleController.text = '';
+      descriptionController.text = '';
+      showSuccessMessage('Edited');
+    } else {
+      showErrorMessage('Error');
+    }
   }
 
   Future<void> submitData() async {
